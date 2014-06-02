@@ -36,7 +36,17 @@ function! jake#eval_range()
   return jake#eval(jake#get_visual_selection())
 endfunction
 
-command! JakeConnect call jake#connect()
-command! JakeDisconnect call jake#disconnect()
-command! JakeEvalLine echo jake#eval_line()
-command! -range JakeEvalRange echo jake#eval_range()
+function! s:setup()
+  command! -buffer JakeConnect call jake#connect()
+  command! -buffer JakeDisconnect call jake#disconnect()
+  command! -buffer JakeEvalLine echo jake#eval_line()
+  command! -buffer -range JakeEvalRange echo jake#eval_range()
+
+  nmap <buffer> cpp :JakeEvalLine<CR>
+  vmap <buffer> cpp :JakeEvalRange<CR>
+endfunction
+
+augroup jake_start
+  autocmd!
+  autocmd FileType javascript call s:setup()
+augroup END
