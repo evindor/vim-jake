@@ -38,5 +38,5 @@ endfunction
 
 command! JakeConnect call jake#connect()
 command! JakeDisconnect call jake#disconnect()
-nnoremap <leader>o <esc>:echo jake#eval_line()<CR>
-vnoremap <leader>o <esc>:echo jake#eval_range()<CR>
+command! JakeEvalLine echo jake#eval_line()
+command! -range JakeEval echo jake#eval_range()
