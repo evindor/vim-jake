@@ -39,4 +39,4 @@ endfunction
 command! JakeConnect call jake#connect()
 command! JakeDisconnect call jake#disconnect()
 command! JakeEvalLine echo jake#eval_line()
-command! -range JakeEval echo jake#eval_range()
+command! -range JakeEvalRange echo jake#eval_range()
