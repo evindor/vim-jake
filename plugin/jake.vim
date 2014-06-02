@@ -25,7 +25,7 @@ function! jake#eval(cmd)
   call s:sock.write(a:cmd . "\n")
   sleep 5m
   let res = s:sock.read_lines()
-  return join(res, '\n')
+  return join(res, "\n")
 endfunction
 
 function! jake#eval_line()
@@ -36,13 +36,19 @@ function! jake#eval_range()
   return jake#eval(jake#get_visual_selection())
 endfunction
 
+function! jake#load_file(file)
+  return jake#eval(".load " . a:file . "\n")
+endfunction
+
 function! s:setup()
   command! -buffer JakeConnect call jake#connect()
   command! -buffer JakeDisconnect call jake#disconnect()
   command! -buffer JakeEvalLine echo jake#eval_line()
   command! -buffer -range JakeEvalRange echo jake#eval_range()
+  command! -buffer JakeLoadFile call jake#load_file(expand("%:p"))
 
   nmap <buffer> cpp :JakeEvalLine<CR>
+  nmap <buffer> cpl :JakeLoadFile<CR>
   vmap <buffer> cpp :JakeEvalRange<CR>
 endfunction
 

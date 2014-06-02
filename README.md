@@ -22,6 +22,7 @@ You'll have the following bindings available in your javascript files:
 ```
 cpp - to evaluate line
 cpp (in visual mode) - evaluate selection
+cpl - evaluate whole file
 ```
 
 ![jake](https://cloud.githubusercontent.com/assets/822951/3149038/65608e42-ea67-11e3-97ae-97aa1973f39d.png)
