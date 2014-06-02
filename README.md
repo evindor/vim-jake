@@ -24,4 +24,5 @@ cpp - to evaluate line
 cpp (in visual mode) - evaluate selection
 ```
 
-![image](https://cloud.githubusercontent.com/assets/822951/3149009/06e06b44-ea67-11e3-8f96-202af8fa4828.png)
+![jake](https://cloud.githubusercontent.com/assets/822951/3149038/65608e42-ea67-11e3-97ae-97aa1973f39d.png)
+
