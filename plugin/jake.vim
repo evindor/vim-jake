@@ -16,11 +16,7 @@ endfunction
 function! jake#connect()
   " Get user input
   " http://vim.wikia.com/wiki/User_input_from_a_script
-  let curline = getline('.')
-  call inputsave()
   let port = input('Port: ', '5000')
-  call inputrestore()
-  call setline('.', curline . ' ' . name)
   let s:sock = vimproc#socket_open('localhost', port)
 endfunction
 
@@ -47,15 +43,23 @@ function! jake#load_file(file)
   return jake#eval(".load " . a:file . "\n")
 endfunction
 
+function! jake#prompt_repl()
+  let code = input('> ')
+  execute 'redraw'
+  echo jake#eval(code)
+endfunction
+
 function! s:setup()
   command! -buffer JakeConnect call jake#connect()
   command! -buffer JakeDisconnect call jake#disconnect()
   command! -buffer JakeEvalLine echo jake#eval_line()
   command! -buffer -range JakeEvalRange echo jake#eval_range()
   command! -buffer JakeLoadFile call jake#load_file(expand("%:p"))
+  command! -buffer JakeREPL call jake#prompt_repl()
 
   nmap <buffer> cpp :JakeEvalLine<CR>
   nmap <buffer> cpl :JakeLoadFile<CR>
+  nmap <buffer> cqp :JakeREPL<CR>
   vmap <buffer> cpp :JakeEvalRange<CR>
 endfunction
 
