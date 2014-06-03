@@ -14,7 +14,14 @@ function! jake#get_visual_selection()
 endfunction
 
 function! jake#connect()
-  let s:sock = vimproc#socket_open('localhost', 5000)
+  " Get user input
+  " http://vim.wikia.com/wiki/User_input_from_a_script
+  let curline = getline('.')
+  call inputsave()
+  let port = input('Port: ', '5000')
+  call inputrestore()
+  call setline('.', curline . ' ' . name)
+  let s:sock = vimproc#socket_open('localhost', port)
 endfunction
 
 function! jake#disconnect()
